@@ -1,0 +1,96 @@
+<!DOCTTYPE html>
+<html>
+<head>
+<title>HTML Table to Markdown Converter</title>
+<style>
+result { display: block; white-space: pre; font-family: monospace; unicode-bidi: embed; }
+textarea { width: 100%; height: 400px; display: block; }
+processor { display: none; }
+</style>
+</head>
+<body>
+  <textarea id="pastebox"></textarea>
+  <button id="convert">Convert</button>
+<result>
+</result>
+<processor>
+
+</processor>
+<script type="text/javascript">
+var NL = "\n";
+var textarea, button, result, processor;
+
+function setup() {
+  textarea = doc('pastebox');
+  button = doc('convert');
+  result = doc('result');
+  processor = doc('processor');
+
+  button.addEventListener('click', function() {
+    convertTable();
+  });
+}
+
+function doc(id) {
+  return document.getElementById(id) || document.getElementsByTagName(id)[0];
+}
+
+function convertTable() {
+  var content = textarea.value;
+  processor.innerHTML = content;
+
+  var tables = processor.getElementsByTagName('table');
+  var markdownResults = '';
+  if(tables) {
+
+    for(i=0; i<tables.length; i++) {
+      var tableElement = tables[i];
+      var markdownTable = convertTableElementToMarkdown(tableElement);
+      markdownResults += markdownTable + NL + NL;
+    }
+    reportResult(tables.length + ' tables found. ' + NL + NL + markdownResults);
+  }
+  else {
+    reportResult('No table found');
+  }
+}
+
+function reportResult(message) {
+  result.innerHTML = message;
+}
+
+function convertTableElementToMarkdown(tableEl) {
+  var rows = [];
+  var trEls = tableEl.getElementsByTagName('tr');
+  for(var i=0; i<trEls.length; i++) {
+    var tableRow = trEls[i];
+    var markdownRow = convertTableRowElementToMarkdown(tableRow, i);
+    rows.push(markdownRow);
+  }
+  return rows.join(NL);
+}
+
+function convertTableRowElementToMarkdown(tableRowEl, rowNumber) {
+  var cells = [];
+  var cellEls = tableRowEl.children;
+  for(var i=0; i<cellEls.length; i++) {
+    var cell = cellEls[i];
+    cells.push(cell.innerText + ' |');
+  }
+  var row = '| ' + cells.join(" ");
+
+  if(rowNumber == 0) {
+    var dividerCells = [];
+    for(i = 0; i<cellEls.length; i++) {
+      dividerCells.push('---' + ' |');
+    }
+    row = row + NL + '| ' + dividerCells.join(" ");
+  }
+
+  return row;
+}
+
+setup();
+</script>
+</body>
+</html>
