@@ -84,14 +84,18 @@ function convertTableRowElementToMarkdown(tableRowEl, rowNumber) {
   var row = '| ' + cells.join(" ");
 
   if(rowNumber == 0) {
-    var dividerCells = [];
-    for(i = 0; i<cellEls.length; i++) {
-      dividerCells.push('---' + ' |');
-    }
-    row = row + NL + '| ' + dividerCells.join(" ");
+    row = row + NL + createMarkdownDividerRow(cellEls.length);
   }
 
   return row;
+}
+
+function createMarkdownDividerRow(cellCount) {
+  var dividerCells = [];
+  for(i = 0; i<cellCount; i++) {
+    dividerCells.push('---' + ' |');
+  }
+  return '| ' + dividerCells.join(" ");
 }
 
 setup();
