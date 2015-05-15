@@ -3,12 +3,16 @@
 <head>
 <title>HTML Table to Markdown Converter</title>
 <style>
+body { margin: 10px; font-family: sans-serif; }
+heading { font-size: 30px; font-weight: bold; display: block; }
 result { display: block; white-space: pre; font-family: monospace; unicode-bidi: embed; }
-textarea { width: 100%; height: 400px; display: block; }
+textarea { width: 100%; height: 400px; display: block; margin: 10px 0; }
+button { padding: 5px; }
 processor { display: none; }
 </style>
 </head>
 <body>
+  <heading>HTML Table to Markdown Converter</heading>
   <textarea id="pastebox"></textarea>
   <button id="convert">Convert</button>
 <result>
