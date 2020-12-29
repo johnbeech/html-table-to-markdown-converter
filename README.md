@@ -1,7 +1,7 @@
 Converts HTML Tables to Markdown.
 
 Paste in the raw HTML for the table you want to convert, e.g.:
-```
+```html
 <table>
   <tr><th>One</th><th>Two</th><th>Three</th></tr>
   <tr><td>Apples</td><td>Oranges</td><td>Pears</td></tr>
@@ -18,4 +18,4 @@ Produces something like:
 ```
 
 Demo:
-https://cdn.rawgit.com/johnbeech/html-table-to-markdown-converter/master/table-converter.html
+- http://johnbeech.github.io/html-table-to-markdown-converter/index.html
