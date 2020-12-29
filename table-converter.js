@@ -18,7 +18,7 @@ function doc(id) {
 
 function convertTable() {
   var content = textarea.value;
-  processor.innerHTML = content;
+  processor.innerHTML = content.replace(/\s+/g, ' ');
 
   var tables = processor.getElementsByTagName('table');
   var markdownResults = '';
