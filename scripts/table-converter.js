@@ -23,10 +23,8 @@ function convertTable() {
   var tables = processor.getElementsByTagName('table');
   var markdownResults = '';
   if(tables) {
-
-    for(i=0; i<tables.length; i++) {
-      var tableElement = tables[i];
-      var markdownTable = convertTableElementToMarkdown(tableElement);
+    for(let e of tables) {
+      var markdownTable = convertTableElementToMarkdown(e);
       markdownResults += markdownTable + NL + NL;
     }
     reportResult(tables.length + ' tables found. ' + NL + NL + markdownResults);
